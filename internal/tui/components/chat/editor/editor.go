@@ -575,7 +575,7 @@ func New(app *app.App) Editor {
 		// TODO: remove the app instance from here
 		app:      app,
 		textarea: ta,
-		keyMap:   DefaultEditorKeyMap(),
+		keyMap:   NewEditorKeyMap(app.Config()),
 	}
 	e.setEditorPrompt()
 
