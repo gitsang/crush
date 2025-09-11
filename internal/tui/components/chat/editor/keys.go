@@ -2,6 +2,7 @@ package editor
 
 import (
 	"github.com/charmbracelet/bubbles/v2/key"
+	"github.com/charmbracelet/crush/internal/config"
 )
 
 type EditorKeyMap struct {
@@ -33,6 +34,21 @@ func DefaultEditorKeyMap() EditorKeyMap {
 			key.WithHelp("ctrl+j", "newline"),
 		),
 	}
+}
+
+func NewEditorKeyMap(cfg *config.Config) EditorKeyMap {
+	keyMap := DefaultEditorKeyMap()
+
+	if cfg != nil && cfg.Options != nil && cfg.Options.TUI != nil {
+		if cfg.Options.TUI.SendKey != "" {
+			keyMap.SendMessage = key.NewBinding(
+				key.WithKeys(cfg.Options.TUI.SendKey),
+				key.WithHelp(cfg.Options.TUI.SendKey, "send"),
+			)
+		}
+	}
+
+	return keyMap
 }
 
 // KeyBindings implements layout.KeyMapProvider

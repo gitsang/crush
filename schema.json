@@ -484,6 +484,10 @@
             "split"
           ],
           "description": "Diff mode for the TUI interface"
+        },
+        "send_key": {
+          "type": "string",
+          "description": "Key binding to send messages"
         }
       },
       "additionalProperties": false,
